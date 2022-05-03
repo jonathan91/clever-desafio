@@ -18,7 +18,5 @@ RUN apt-get install -y git zlib1g-dev \
 
 RUN chmod -R o+w /var/www/api
 RUN a2enmod rewrite
-
-#ENTRYPOINT ["sh", "docker/entrypoint.sh"]
-#CMD ["/etc/init.d/apache2 reload", "-D", "FOREGROUND"]
+RUN composer install
 EXPOSE 80

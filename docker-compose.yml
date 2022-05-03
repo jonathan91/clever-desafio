@@ -22,9 +22,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:80
-    volumes:
-      - ./api:/var/www/api
-      - ./docker/log:/var/log
+    #volumes:
+    #  - ./api:/var/www/api
+    #  - ./docker/log:/var/log
     restart: always
 networks:
   default:
