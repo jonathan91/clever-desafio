@@ -2,7 +2,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="customers")
@@ -11,38 +10,23 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Customers extends AbstractEntity 
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\SequenceGenerator(sequenceName="customers_id_seq", initialValue=1, allocationSize=1)
      */
-    protected $id;
-    
+    protected int $id;
     /**
-    * @var string 
     * @ORM\Column(name="name", type="string", nullable=false)
-    * 
     */
-    
-    protected $name;
-    
+    protected string $name;
     /**
-    * @var string 
     * @ORM\Column(name="coutry", type="string", nullable=false, unique=true)
-    * 
     */
-    
-    protected $coutry;
-    
+    protected string $coutry;
     /**
-    * @var string 
     * @ORM\Column(name="phone", type="string", nullable=false)
-    * 
     */
-    
-    protected $phone;
+    protected string $phone;
     
     public function getId(): ?int
     {

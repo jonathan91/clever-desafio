@@ -22,9 +22,9 @@ export class CustomersFormComponent implements OnInit, OnDestroy {
   isEdit = false;
   
   coutries: Coutry[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+    {value: 'US', viewValue: 'US'},
+    {value: 'BR', viewValue: 'BR'},
+    {value: 'UK', viewValue: 'UK'},
   ];
 
   private routeSub: Subscription;

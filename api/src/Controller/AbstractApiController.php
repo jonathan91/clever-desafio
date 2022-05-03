@@ -6,22 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\Query\AbstractQuery;
 use App\Service\Command\AbstractCommand;
 
 abstract class AbstractApiController  extends AbstractController
 {
-    /**
-     * 
-     * @var CommandBus
-     */
-    protected $command;
-    /**
-     * 
-     * @param CommandBus $command
-     */
+    protected CommandBus $command;
+
     public function __construct(CommandBus $command)
     {
         $this->command = $command;
@@ -37,6 +29,7 @@ abstract class AbstractApiController  extends AbstractController
         if($data instanceof  ConstraintViolationList){
             return parent::json($data, Response::HTTP_BAD_REQUEST, $headers, $context);
         }
+
         return parent::json($data, $status, $headers, $context);
     } 
 
@@ -50,14 +43,13 @@ abstract class AbstractApiController  extends AbstractController
     }
 
     /**
-     * @param $query
-     * @param Request $request
      * @return JsonResponse
      */
     public function prepareSearch(AbstractQuery $query, Request $request)
     {
         try {
             $data = $query->search($request->query->all());
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
@@ -65,14 +57,13 @@ abstract class AbstractApiController  extends AbstractController
     }
     
     /**
-     * @param $id
-     * @param AbstractQuery $query
      * @return JsonResponse
      */
-    public function prepareQueryById($id, AbstractQuery $query)
+    public function prepareQueryById(int $id, AbstractQuery $query)
     {
         try {
             $data = $query->findById($id);
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
@@ -80,8 +71,6 @@ abstract class AbstractApiController  extends AbstractController
     }
     
     /**
-     * @param Request $request
-     * @param $commandClass
      * @return JsonResponse
      */
     public function preparePost(Request $request, AbstractCommand $command)
@@ -91,11 +80,15 @@ abstract class AbstractApiController  extends AbstractController
             if(empty($newRequest)){
                 $newRequest = json_decode($request->getContent());
             }
+
             foreach ($request->files as $name => $file) {
                 $newRequest[$name] = $file;
             }
+
             $command->setValues($newRequest);
+            
             $data = $this->getServiceBus()->handle($command);
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
@@ -103,13 +96,9 @@ abstract class AbstractApiController  extends AbstractController
     }
     
     /**
-     * @param $id
-     * @param Request $request
-     * @param $commandClass
-     * @param string $keyProperty
      * @return JsonResponse
      */
-    public function preparePut($id, Request $request, AbstractCommand $command, $keyProperty = "id")
+    public function preparePut(int $id, Request $request, AbstractCommand $command, $keyProperty = "id")
     {
         try {
             $content = json_decode($request->getContent(), true);
@@ -117,6 +106,7 @@ abstract class AbstractApiController  extends AbstractController
             $command->setValues($content);
             $command->setValue($keyProperty, $id);
             $data = $this->getServiceBus()->handle($command);
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
@@ -124,16 +114,15 @@ abstract class AbstractApiController  extends AbstractController
     }
     
     /**
-     * @param $id
-     * @param $commandClass
      * @param string $keyProperty
      * @return JsonResponse
      */
-    public function prepareDelete($id, AbstractCommand $command, $keyProperty = "id")
+    public function prepareDelete(int $id, AbstractCommand $command, $keyProperty = "id")
     {
         try {
             $command->setValue($keyProperty, $id);
             $data = $this->getServiceBus()->handle($command);
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
@@ -141,15 +130,14 @@ abstract class AbstractApiController  extends AbstractController
     }
     
     /**
-     * @param $id
-     * @param $commandClass
      * @return JsonResponse
      */
-    public function preparePatch($id, AbstractCommand $command, $keyProperty = "id")
+    public function preparePatch(int $id, AbstractCommand $command, $keyProperty = "id")
     {
         try {
             $command->setValue($keyProperty, $id);
             $data = $this->getServiceBus()->handle($command);
+
             return $this->json($data, Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);

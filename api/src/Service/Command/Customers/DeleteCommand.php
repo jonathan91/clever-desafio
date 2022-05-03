@@ -7,9 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DeleteCommand extends AbstractCommand
 {
     /**
-	 * @var int
      * @Assert\NotBlank() 
   	 */
-	public $id;
+	public int $id;
     
 }

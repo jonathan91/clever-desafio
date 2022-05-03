@@ -12,22 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractHandler
 {
+    protected EntityManager $em;
 
-    /**
-     * 
-     * @var EntityManager
-     */
-    protected $em;
+    protected ValidatorInterface $validator;
 
-    /**
-     *
-     * @var ValidatorInterface
-     */
-    protected $validator;
-    /**
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em, ValidatorInterface $validator)
     {
         $this->em = $em;
@@ -37,9 +25,6 @@ abstract class AbstractHandler
     abstract public function handle(AbstractCommand $command);
 
     /**
-     *
-     * @param AbstractEntity $entity
-     * @param AbstractCommand $command
      * @return AbstractEntity|ConstraintViolationListInterface
      * @throws ORMException
      * @throws OptimisticLockException
@@ -51,15 +36,14 @@ abstract class AbstractHandler
             $entity->setValues($command->toArray());
             $this->em->persist($entity);
             $this->em->flush();
+
             return $entity;
         }
+
         return $error;
     }
 
     /**
-     *
-     * @param AbstractEntity $entityInput
-     * @param AbstractCommand $command
      * @return object|ConstraintViolationListInterface|null
      * @throws ORMException
      * @throws OptimisticLockException
@@ -70,20 +54,20 @@ abstract class AbstractHandler
         if(empty($entity)){
             throw new NotFoundHttpException("The record with ID: {$command->id} can't identified.");
         }
+
         $error = $this->validator->validate($command);
         if($error->count() == 0) {
             $entity->setValues($command->toArray());
             $this->em->persist($entity);
             $this->em->flush();
+
             return $entity;
         }
+
         return $error;
     }
 
     /**
-     *
-     * @param AbstractEntity $entityInput
-     * @param AbstractCommand $command
      * @return array|ConstraintViolationListInterface
      * @throws ORMException
      * @throws OptimisticLockException
@@ -96,19 +80,19 @@ abstract class AbstractHandler
             if (empty($entity)) {
                 throw new NotFoundHttpException("The record with ID: {$command->id} can't identified.");
             }
+
             $this->em->remove($entity);
             $this->em->flush();
+
             return [
                 "The record with ID: {$command->id} was deleted."
             ];
         }
+
         return $error;
     }
 
     /**
-     *
-     * @param AbstractEntity $entityInput
-     * @param AbstractCommand $command
      * @return object|ConstraintViolationListInterface|NULL
      * @throws ORMException
      * @throws OptimisticLockException

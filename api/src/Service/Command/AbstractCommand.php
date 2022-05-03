@@ -1,6 +1,8 @@
 <?php 
 namespace App\Service\Command;
 
+use ReflectionClass;
+
 abstract class AbstractCommand
 {
     /**
@@ -32,16 +34,12 @@ abstract class AbstractCommand
     }
     
     /**
-     *
      * @param array $data
      */
     public function setValues($data)
     {
         foreach ($data as $key => $value ) {
-            $attributs = array_keys(get_object_vars($this));
-            if(in_array($key, $attributs)){
-                $this->setValue($key, $value);
-            }
+            $this->setValue($key, $value);
         }
     }
     
