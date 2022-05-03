@@ -13,7 +13,7 @@
         "league/oauth2-client": "^2.4",
         "league/tactician-bundle": "^1.1",
         "nelmio/api-doc-bundle": "3.6.*",
-        "nelmio/cors-bundle": "^2.0",
+        "nelmio/cors-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "5.0.*",
         "symfony/console": "5.0.*",
@@ -38,7 +38,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
