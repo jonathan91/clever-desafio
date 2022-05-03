@@ -21,30 +21,30 @@
                                 <div class="col-md-1">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Coutry</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let coutry of coutries" [value]="coutry.value">
+                                        <mat-select [(value)]="iso">
+                                            <mat-option *ngFor="let coutry of coutries " name="coutry " [value]="coutry.value ">
                                                 {{coutry.viewValue}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
 
-                                <div class="col-md-1">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Code" [(ngModel)]="customers.coutry" name="coutry" type="text">
+                                <div class="col-md-1 ">
+                                    <mat-form-field class="example-full-width ">
+                                        <input matInput placeholder="Code " [(ngModel)]="customers.coutry " name="coutry " type="text ">
                                     </mat-form-field>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Phone" [(ngModel)]="customers.phone" name="phone" type="text">
+                                <div class="col-md-4 ">
+                                    <mat-form-field class="example-full-width ">
+                                        <input matInput placeholder="Phone " [(ngModel)]="customers.phone " name="phone " type="text ">
                                     </mat-form-field>
                                 </div>
 
                             </div>
-                            <button mat-raised-button type="button" class="btn btn-warning pull-right" routerLink="/customers">Cancel</button>
-                            <button mat-raised-button type="submit" class="btn btn-success pull-right" [disabled]="customersForm.form.invalid || isSaving">Save</button>
-                            <div class="clearfix"></div>
+                            <button mat-raised-button type="button " class="btn btn-warning pull-right " routerLink="/customers ">Cancel</button>
+                            <button mat-raised-button type="submit " class="btn btn-success pull-right " [disabled]="customersForm.form.invalid || isSaving ">Save</button>
+                            <div class="clearfix "></div>
                         </form>
                     </div>
                 </div>

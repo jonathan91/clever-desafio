@@ -20,9 +20,13 @@ class Customers extends AbstractEntity
     */
     protected string $name;
     /**
-    * @ORM\Column(name="coutry", type="string", nullable=false, unique=true)
+    * @ORM\Column(name="coutry_code", type="string", nullable=false, unique=true)
     */
     protected string $coutry;
+    /**
+    * @ORM\Column(name="iso_code", type="string", nullable=false, unique=true)
+    */
+    protected string $iso;
     /**
     * @ORM\Column(name="phone", type="string", nullable=false)
     */
@@ -54,7 +58,18 @@ class Customers extends AbstractEntity
         $this->coutry = $coutry;
         return $this;
     }
-    
+
+    public function getIso(): string
+    {
+        return $this->iso;
+    }
+
+    public function setIso(string $iso): Customers
+    {
+        $this->iso = $iso;
+        return $this;
+    }
+
     public function getPhone(): string
     {
         return $this->phone;

@@ -20,11 +20,14 @@ export class CustomersFormComponent implements OnInit, OnDestroy {
   customers: Customers;
   isSaving: boolean;
   isEdit = false;
+  iso = "";
   
   coutries: Coutry[] = [
-    {value: 'US', viewValue: 'US'},
-    {value: 'BR', viewValue: 'BR'},
-    {value: 'UK', viewValue: 'UK'},
+    {value: 'CM', viewValue: 'Cameroon'},
+    {value: 'ET', viewValue: 'Ethiopia'},
+    {value: 'MA', viewValue: 'Morocco'},
+    {value: 'MZ', viewValue: 'Mozambique'},
+    {value: 'UG', viewValue: 'Uganda'},
   ];
 
   private routeSub: Subscription;
@@ -55,6 +58,7 @@ export class CustomersFormComponent implements OnInit, OnDestroy {
     if (this.customers.id !== undefined) {
       this.subscribeToSaveResponse(this.customersService.update(this.customers));
     } else {
+      this.customers.iso = this.iso;
       this.subscribeToSaveResponse(this.customersService.create(this.customers));
     }
   }

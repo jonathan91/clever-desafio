@@ -25,6 +25,11 @@ class PutCommand extends AbstractCommand
     public string $coutry;
     /**
     * @Assert\NotBlank()
+    * @Assert\Length(max = 2)
+    */
+    public string $iso;
+    /**
+    * @Assert\NotBlank()
     */
     public string $phone;
 }
