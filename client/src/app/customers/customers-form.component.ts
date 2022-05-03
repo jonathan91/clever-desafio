@@ -5,6 +5,13 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import { Customers } from './models/customers.model';
 import { CustomersService } from './services/customers.service';
 
+
+interface Coutry {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-customers-form',
   templateUrl: './customers-form.component.html'
@@ -13,7 +20,15 @@ export class CustomersFormComponent implements OnInit, OnDestroy {
   customers: Customers;
   isSaving: boolean;
   isEdit = false;
+  
+  coutries: Coutry[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
+
   private routeSub: Subscription;
+
 
   constructor(
     private route: ActivatedRoute,
