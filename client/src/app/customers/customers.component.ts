@@ -6,6 +6,12 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import { CardComponent } from 'app/shared/card/card.component';
 import { CustomersService } from './services/customers.service';
 import { Customers } from './models/customers.model';
+import { HttpParams } from '@angular/common/http';
+
+interface Select {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-customers',
@@ -17,6 +23,21 @@ export class CustomersComponent implements OnInit, OnDestroy {
   card: CardComponent;
 
   searchUrl: string = this.customersService.resourceUrl;
+  st = "";
+  coutry = "";
+
+  coutries: Select[] = [
+    {value: 'CM', viewValue: 'Cameroon'},
+    {value: 'ET', viewValue: 'Ethiopia'},
+    {value: 'MA', viewValue: 'Morocco'},
+    {value: 'MZ', viewValue: 'Mozambique'},
+    {value: 'UG', viewValue: 'Uganda'},
+  ];
+
+  status: Select[] = [
+    {value: 'VALID', viewValue: 'Valid'},
+    {value: 'INVALID', viewValue: 'Invalid'},
+  ];
 
   constructor(
     private router: Router,
@@ -61,6 +82,13 @@ export class CustomersComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  search() {
+    let params = new HttpParams();
+    params = params.append('status', this.st);
+    params = params.append('iso', this.coutry);
+    this.card.search(params);
   }
 
   ngOnInit() {

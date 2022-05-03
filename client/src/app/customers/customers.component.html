@@ -1,6 +1,35 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+            <form style="width: 100%;" name="customersForm" role="form" novalidate (ngSubmit)="search()" #customersForm="ngForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Coutry</mat-label>
+                                <mat-select [(value)]="coutry">
+                                    <mat-option *ngFor="let coutry of coutries " name="coutry" [value]="coutry.value">
+                                        {{coutry.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Status</mat-label>
+                                <mat-select [(value)]="st">
+                                    <mat-option *ngFor="let st of status " name="status" [value]="st.value">
+                                        {{st.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button type="submit " class="btn btn-success pull-right " [disabled]="customersForm.form.invalid || isSaving ">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <app-card link="/customers/new" (click)="click($event)" title="Customers" category="Information List" [url]="searchUrl"></app-card>
             </div>

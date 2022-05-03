@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CardService } from './card.service';
 import { ClickEvent } from './click.event';
-import { HttpResponse } from '@angular/common/http';
+import { HttpParams, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-card',
@@ -58,6 +58,16 @@ export class CardComponent implements OnInit {
     this.click.emit(new ClickEvent('', this.selectedRow));
     if (this.type === 'server') {
         this.cardService.query(this.url).subscribe(
+          (response: {data: Array<Object>, total: number}) => {
+            this.value = response.data;
+        }
+      );
+    }
+  }
+
+  search(params) {
+    if (this.type === 'server') {
+      this.cardService.query(this.url, params).subscribe(
           (response: {data: Array<Object>, total: number}) => {
             this.value = response.data;
         }
