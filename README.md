@@ -12,6 +12,7 @@ Para execução do projeto é necessario a execução do seguinte comando via te
 $ docker-compose up -d
 ```
 
+Após a execução acessar o link: [http://localhost:80](http://localhost:80)
 # Documentação
 	
 [Documentação de Arquitetura](api/docs/DAS.md)
