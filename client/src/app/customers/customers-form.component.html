@@ -1,0 +1,46 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">{{
+                            customers.id ? 'Edit
+                                Customers' : 'Create
+                                    Customers' }}</h4>
+                        <p class="card-category">Fill Form</p>
+                    </div>
+                    <div class="card-body">
+                        <form name="customersForm" role="form" novalidate (ngSubmit)="save()" #customersForm="ngForm">
+                            <input type="hidden" name="id" pInputText [(ngModel)]="customers.id" readonly/>
+                            <div class="row">
+                                
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Name" [(ngModel)]="customers.name" name="name" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Coutry" [(ngModel)]="customers.coutry" name="coutry" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Phone" [(ngModel)]="customers.phone" name="phone" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    
+                            </div>
+                            <button mat-raised-button type="button" class="btn btn-warning pull-right" routerLink="/customers">Cancel</button>
+                            <button mat-raised-button type="submit" class="btn btn-success pull-right" [disabled]="customersForm.form.invalid || isSaving">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

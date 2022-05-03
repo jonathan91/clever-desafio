@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">
+                            Customers
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" [ngModel]="customers.name" name="name" type="text" disabled>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Coutry" [ngModel]="customers.coutry" name="coutry" type="text" disabled>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Phone" [ngModel]="customers.phone" name="phone" type="text" disabled>
+                                    </mat-form-field>
+                                </div>
+                                
+                        </div>
+                        <button mat-raised-button type="button" class="btn btn-info pull-right" routerLink="/customers">Go back</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

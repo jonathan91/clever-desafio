@@ -1,0 +1,12 @@
+
+{
+  "generator-jhipster": {
+    "databaseType": "pgsql",
+    "devDatabaseType": "pgsql",
+    "prodDatabaseType": "pgsql"
+  },
+  "config": {
+    "appFramework": "symfony",
+    "frontendDir": "client"
+  }
+}
