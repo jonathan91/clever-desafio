@@ -47,7 +47,10 @@ export class CustomersFormComponent implements OnInit, OnDestroy {
       this.customers = new Customers();
       if (params['id']) {
         this.isEdit = true;
-        this.customersService.find(params['id']).subscribe(customers => this.customers = customers);
+        this.customersService.find(params['id']).subscribe(customers => {
+          this.customers = customers
+          this.iso = customers.iso
+        });
         title = 'Edit';
       }
     });

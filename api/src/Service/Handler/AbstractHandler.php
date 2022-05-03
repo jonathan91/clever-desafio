@@ -36,6 +36,7 @@ abstract class AbstractHandler
             $data = $command->toArray();
             unset($data['_data']);
             $entity->setValues($data);
+            $this->setStatusPhone($entity, $command);
             $this->em->persist($entity);
             $this->em->flush();
 
@@ -60,6 +61,7 @@ abstract class AbstractHandler
         $error = $this->validator->validate($command);
         if($error->count() == 0) {
             $entity->setValues($command->toArray());
+            $this->setStatusPhone($entity, $command);
             $this->em->persist($entity);
             $this->em->flush();
 
@@ -102,5 +104,33 @@ abstract class AbstractHandler
     public function patch(AbstractEntity $entityInput, AbstractCommand $command)
     {
         return $this->put($entityInput, $command);
+    }
+
+    private function setStatusPhone(AbstractEntity $entityInput, AbstractCommand $command): void
+    {
+        $listIso = [
+            'CM' => "/[2368]\d{7,8}$/",
+            'ET' => "/[2368]\d{7,8}$/",
+            'MA' => "/[5-9]\d{8}$/",
+            'MZ' => "/[28]\d{7,8}$/",
+            'UG' => "/d{9}$/",
+        ];
+        $listCode = [
+            'CM' => '237',
+            'ET' => '251',
+            'MA' => '212',
+            'MZ' => '258',
+            'UG' => '256',
+        ];
+        $iso = trim($command->getValue('iso'));
+        $pattern = $listIso[$iso];
+        $entityInput->setValue('status', 'VALID');
+        if(preg_match($pattern, $command->getValue('phone')) != 1) {
+            $entityInput->setValue('status', 'INVALID');
+        }
+
+        if ($command->getValue('coutry') != $listCode[$iso]) {
+            $entityInput->setValue('status', 'INVALID');
+        }
     }
 }

@@ -12,12 +12,12 @@
                 <div class="card-action-column-item">
                     #
                 </div>
-                <div *ngFor="let column of objectKeys(items)" class="card-header-column-item">
+                <div *ngFor="let column of objectKeys(items)" class="card-header-column-item" style="width: 200px;">
                     {{column}}
                 </div>
             </div>
             <div class="card-items-list">
-                <div class="card-action-column-item"> 
+                <div class="card-action-column-item">
                     <button (click)="onClick('edit', $event, items)" mat-raised-button type="button" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
                         <i class="material-icons">edit</i>
                     </button>
@@ -30,7 +30,7 @@
                     <ng-template #defaultButtons>
                     </ng-template>
                 </div>
-                <div *ngFor="let key of objectKeys(items)" class="card-body-column-item">
+                <div *ngFor="let key of objectKeys(items)" class="card-body-column-item" style="width: 200px;">
                     {{items[key]}}
                 </div>
             </div>

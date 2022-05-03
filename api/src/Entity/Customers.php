@@ -31,6 +31,11 @@ class Customers extends AbstractEntity
     * @ORM\Column(name="phone", type="string", nullable=false)
     */
     protected string $phone;
+
+    /**
+    * @ORM\Column(name="status", type="string", nullable=false)
+    */
+    protected string $status;
     
     public function getId(): ?int
     {
@@ -74,11 +79,21 @@ class Customers extends AbstractEntity
     {
         return $this->phone;
     }
-    
+
     public function setPhone(string $phone): Customers
     {
         $this->phone = $phone;
         return $this;
     }
-    
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): Customers
+    {
+        $this->status = $status;
+        return $this;
+    }
 }
