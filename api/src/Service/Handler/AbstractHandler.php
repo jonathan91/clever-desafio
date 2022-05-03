@@ -33,7 +33,9 @@ abstract class AbstractHandler
     {
         $error = $this->validator->validate($command);
         if($error->count() == 0) {
-            $entity->setValues($command->toArray());
+            $data = $command->toArray();
+            unset($data['_data']);
+            $entity->setValues($data);
             $this->em->persist($entity);
             $this->em->flush();
 

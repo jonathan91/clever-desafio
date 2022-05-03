@@ -13,12 +13,6 @@ class PutCommand extends AbstractCommand
     *    min = 0, 
     *    max = 80
     * )
-    * @Assert\Range(
-    *      min = 0,
-    *      max = 80,
-    *      minMessage = "The min value required is {{ limit }}",
-    *      maxMessage = "The max value required is {{ limit }}"
-    * )
     */
     public string $name;
     /**
@@ -26,12 +20,6 @@ class PutCommand extends AbstractCommand
     * @Assert\Length(
     *    min = 1, 
     *    max = 4
-    * )
-    * @Assert\Range(
-    *      min = 1,
-    *      max = 4,
-    *      minMessage = "The min value required is {{ limit }}",
-    *      maxMessage = "The max value required is {{ limit }}"
     * )
     */
     public string $coutry;
