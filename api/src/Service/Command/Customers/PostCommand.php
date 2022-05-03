@@ -22,13 +22,13 @@ class PostCommand extends AbstractCommand
     *    min = 1, 
     *    max = 4
     * )
+    * @CustomAssert\Code(field="iso")
     */
     public string $coutry;
     /**
     * @Assert\NotBlank()
     * @Assert\Length(max = 2)
     * @Assert\Choice({"CM", "ET", "MA", "MZ", "UG"})
-    * @CustomAssert\Code(field="iso")
     */
     public string $iso;
     /**
